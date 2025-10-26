@@ -2,10 +2,14 @@ import { useState } from 'react';
 import { Button } from './ui/button';
 import { Menu, X, Code2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { ImageWithFallback } from './figma/ImageWithFallback';
 
 interface NavigationProps {
   scrolled: boolean;
 }
+const src="/appdost-logo.png"
+const alt="AppDost Logo"
+const className="w-10 h-10 object-contain"
 
 export function Navigation({ scrolled }: NavigationProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -36,14 +40,8 @@ export function Navigation({ scrolled }: NavigationProps) {
       transition={{ type: "spring", stiffness: 300 }}
     >
       {/* Logo image container */}
-      <div className="bg-gradient-to-br from-blue-600 to-purple-600 p-2 rounded-lg flex items-center justify-center">
-        <img
-          src="/appdost-logo.png"
-          alt="AppDost Logo"
-          className="w-10 h-10 object-contain"
-        />
-      </div>
-
+      <ImageWithFallback src={src} alt={alt} className={className} />
+      
       {/* Logo text */}
       <div className="flex flex-col items-start leading-tight">
         <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent text-xl font-bold">
