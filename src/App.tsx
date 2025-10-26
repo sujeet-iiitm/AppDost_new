@@ -7,6 +7,7 @@ import { Contact } from './components/Contact';
 import { Navigation } from './components/Navigation';
 import { Footer } from './components/Footer';
 import { Toaster } from './components/ui/sonner';
+import { GlobalBackgroud } from './components/GlobalBackground';
 
 export default function App() {
   const [scrolled, setScrolled] = useState(false);
@@ -21,6 +22,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50">
+      <GlobalBackgroud />
       <Navigation scrolled={scrolled} />
       <Hero />
       <Services />

@@ -1,30 +1,32 @@
 import { Button } from './ui/button';
 import { ArrowRight, Sparkles, Rocket } from 'lucide-react';
 import { motion } from 'motion/react';
+import Lightning from './Lighting';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
+interface arr {
+  title : string,
+  logo : string,
+  description : string,
+}
+const array : arr  = [
+  {title :  "Web Development",
+   logo : "💻",
+   description : "+10 Projects"
+  },
+  {title :  "Mobile Apps",
+   logo : "📱",
+   description : "+4 Apps"
+  },
+  {title :  "Fast Delivery",
+   logo : "⚡",
+   description : "On Time"
+  },
+
+]
 export function Hero() {
   return (
     <section id="home" className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          animate={{
-            scale: [1, 1.2, 1],
-            rotate: [0, 90, 0],
-          }}
-          transition={{ duration: 20, repeat: Infinity }}
-          className="absolute top-20 right-10 w-72 h-72 bg-purple-300/20 rounded-full blur-3xl"
-        />
-        <motion.div
-          animate={{
-            scale: [1, 1.3, 1],
-            rotate: [0, -90, 0],
-          }}
-          transition={{ duration: 25, repeat: Infinity }}
-          className="absolute bottom-20 left-10 w-96 h-96 bg-blue-300/20 rounded-full blur-3xl"
-        />
-      </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -107,41 +109,40 @@ export function Hero() {
           </motion.div>
 
           {/* Right Content - Illustration */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="relative hidden lg:block"
-          >
+    <motion.div
+      animate={{ y: [0, -20, 0] }}
+      transition={{ duration: 4, repeat: Infinity }}
+      className="relative w-3/4 max-w-3xl mx-auto"
+    >
+      {/* Glowing gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-500 via-purple-600 to-pink-500 rounded-3xl blur-3xl opacity-30" />
+
+      {/* Foreground glass card container */}
+      <div className="relative bg-white/20 backdrop-blur-md p-8 rounded-3xl border border-white/40 shadow-2xl">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          {array.map((item, index) => (
             <motion.div
-              animate={{
-                y: [0, -20, 0],
+              key={item.title}
+              initial={{ opacity: 0, y: 20, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ delay: 0.3 + index * 0.15, type: "spring" }}
+              whileHover={{
+                scale: 1.05,
+                rotate: 1,
+                boxShadow: "0 0 20px rgba(147, 51, 234, 0.4)",
               }}
-              transition={{ duration: 4, repeat: Infinity }}
-              className="relative"
+              className="bg-white/30 backdrop-blur-sm border border-white/50 rounded-2xl p-6 shadow-lg flex flex-col items-center text-center transition-all duration-300"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-purple-600 rounded-3xl blur-2xl opacity-30" />
-              <div className="relative bg-gradient-to-br from-white/40 to-white/20 backdrop-blur-sm p-8 rounded-3xl border border-white/50 shadow-2xl">
-                <div className="grid grid-cols-2 gap-4">
-                  {[1, 2, 3, 4].map((i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 0.8 + i * 0.1 }}
-                      className="bg-white/60 backdrop-blur-sm p-6 rounded-2xl shadow-lg"
-                    >
-                      <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl mb-3 flex items-center justify-center">
-                        <Rocket className="w-6 h-6 text-white" />
-                      </div>
-                      <div className="h-3 bg-gradient-to-r from-slate-200 to-slate-300 rounded w-3/4 mb-2" />
-                      <div className="h-2 bg-slate-200 rounded w-1/2" />
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
+              <div className="text-4xl mb-3 drop-shadow-lg">{item.logo}</div>
+              <h3 className="text-lg font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                {item.title}
+              </h3>
+              <p className="text-sm text-slate-700/80 mt-2">{item.description}</p>
             </motion.div>
-          </motion.div>
+          ))}
+        </div>
+      </div>
+    </motion.div>
         </div>
       </div>
     </section>
